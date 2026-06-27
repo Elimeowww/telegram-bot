@@ -1,10 +1,9 @@
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 TOKEN = "8871850096:AAG7WEcfdR7Zg-BbmQuBqJdM2BpLtYroMl8"
 
-# 📌 کانال اجباری (حتماً @ بگذار)
-CHANNEL_USERNAME = "@gaptestes"
+CHANNEL = "@gaptestes"  # 👈 کانال اینجا
 
 FILES = {
     "manhwa1": "FILE_ID_1",
@@ -12,10 +11,10 @@ FILES = {
     "manhwa3": "FILE_ID_3"
 }
 
-# 🔍 چک عضویت کاربر
-async def check_membership(bot, user_id):
+# 🟢 چک عضویت
+async def is_member(bot, user_id):
     try:
-        member = await bot.get_chat_member(@gaptestes)
+        member = await bot.get_chat_member(CHANNEL, user_id)
         return member.status in ["member", "creator", "administrator"]
     except:
         return False
@@ -25,11 +24,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     bot = context.bot
 
-    is_member = await check_membership(bot, user_id)
-
-    if not is_member:
+    # چک عضویت
+    if not await is_member(bot, user_id):
         await update.message.reply_text(
-            f"❌ برای استفاده از ربات باید عضو کانال زیر بشی:\n\n{CHANNEL_USERNAME}\n\nبعد دوباره /start بزن"
+            f"❌ برای استفاده از ربات باید عضو کانال زیر بشی:\n\n{CHANNEL}"
         )
         return
 
@@ -48,20 +46,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text("❌ فایل پیدا نشد")
 
     else:
-        await update.message.reply_text("سلام 👋\nلینک فایل رو بزن")
+        await update.message.reply_text("سلام 👋")
 
-# 🟢 گرفتن file_id
-async def get_file_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.message.document:
-        await update.message.reply_text(
-            f"📦 FILE_ID:\n{update.message.document.file_id}"
-        )
-
+# 🚀 اجرا
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.Document.ALL, get_file_id))
 
     print("Bot is running...")
     app.run_polling()
