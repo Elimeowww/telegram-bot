@@ -5,7 +5,7 @@ TOKEN = "8871850096:AAG7WEcfdR7Zg-BbmQuBqJdM2BpLtYroMl8"
 
 FILES = {
     "manhwa1": "FILE_ID_1",
-    "manhwa2": "FILE_ID_2",
+    "manhwa25": "BQACAgQAAxkBAANTakAIpqeymmDk1IQAAXbDrxEe1m1fAAI8GAACtFn4UarzHCrgfAS-PAQ",
     "manhwa3": "FILE_ID_3"
 }
 
