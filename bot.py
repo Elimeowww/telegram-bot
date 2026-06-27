@@ -15,7 +15,7 @@ FILES = {
 # 🔍 چک عضویت کاربر
 async def check_membership(bot, user_id):
     try:
-        member = await bot.get_chat_member("@gaptestes", user_id)
+        member = await bot.get_chat_member("https://t.me/gaptestes", "@gaptestes")
         return member.status in ["member", "creator", "administrator"]
     except:
         return False
