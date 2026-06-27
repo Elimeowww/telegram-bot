@@ -1,35 +1,24 @@
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 
 TOKEN = "8871850096:AAG7WEcfdR7Zg-BbmQuBqJdM2BpLtYroMl8"
 
-# اینجا فایل‌هات رو می‌ذاری
-FILES = {
-    "manhwa1": "FILE_ID_1",
-    "manhwa2": "FILE_ID_2",
-    "chapter3": "FILE_ID_3"
-}
-
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    args = context.args
+    await update.message.reply_text("فایل بفرست تا file_id بدم 👇")
 
-    if args:
-        key = args[0]
+async def get_file_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    file = update.message.document
 
-        if key in FILES:
-            await update.message.reply_text("📦 در حال ارسال فایل...")
-
-            await update.message.reply_document(
-                document=FILES[key]
-            )
-        else:
-            await update.message.reply_text("❌ فایل پیدا نشد")
+    if file:
+        await update.message.reply_text(f"📦 FILE_ID:\n{file.file_id}")
     else:
-        await update.message.reply_text("سلام 👋")
+        await update.message.reply_text("این فایل نیست ❌")
 
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
+
     app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.Document.ALL, get_file_id))
 
     print("Bot is running...")
     app.run_polling()
