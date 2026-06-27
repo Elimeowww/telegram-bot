@@ -4,7 +4,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 TOKEN = "8871850096:AAG7WEcfdR7Zg-BbmQuBqJdM2BpLtYroMl8"
 
 # 📌 کانال اجباری (حتماً @ بگذار)
-CHANNEL_USERNAME = "@YourChannel"
+CHANNEL_USERNAME = "@gaptestes"
 
 FILES = {
     "manhwa1": "FILE_ID_1",
@@ -15,7 +15,7 @@ FILES = {
 # 🔍 چک عضویت کاربر
 async def check_membership(bot, user_id):
     try:
-        member = await bot.get_chat_member("https://t.me/gaptestes", "@gaptestes")
+        member = await bot.get_chat_member(@gaptestes)
         return member.status in ["member", "creator", "administrator"]
     except:
         return False
