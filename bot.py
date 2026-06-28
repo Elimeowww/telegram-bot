@@ -1,14 +1,9 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 
-TOKEN = "8871850096:AAG7WEcfdR7Zg-BbmQuBqJdM2BpLtYroMl8"
+TOKEN = "8769525491:AAH2Nh6T_ubofOXVUkO1rethXZcwaSVv24U"
 
-ADMIN_ID = 8256304031  # 👈 آیدی خودت
-
-CHANNEL = [ 
-    "@femboycuteir"
-    "https://t.me/+8W6XKgRQyYZkYjlk"
-]# (اگر خواستی بعداً فعالش کن)
+ADMIN_ID = 8256304031  # آیدی عددی خودت
 
 FILES = {
     "manhwa132": "BQACAgQAAxkBAAOqakD94Gjhf9IY14k_ioEFmsBbFKoAAs4eAAK09AlSsFgEqZGBt0w8BA",
@@ -16,28 +11,13 @@ FILES = {
     "manhwa3": "FILE_ID_3"
 }
 
-# 👑 چک ادمین
-def is_admin(user_id):
-    return user_id == ADMIN_ID
 
-# 🚀 استارت (فقط ادمین می‌بیند)
+# استارت
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
-
-    # ❌ بقیه هیچ چیزی نمی‌بینند
-    if not is_admin(user_id):
-        return
-
-    await update.message.reply_text(
-        "👑 پنل ادمین فعال شد\n"
-        "📌 فایل بفرست برای گرفتن FILE_ID\n"
-        "📌 یا لینک: /start manhwa1"
-    )
-
-# 📦 ارسال فایل برای کاربران (بدون محدودیت پیام start)
-async def send_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
 
+    # اگر لینک دانلود بود
     if args:
         key = args[0]
 
@@ -47,27 +27,38 @@ async def send_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await update.message.reply_text("❌ فایل پیدا نشد")
 
-# 🟢 گرفتن FILE_ID فقط برای ادمین
-async def get_file_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = update.effective_user.id
+        return
 
-    if not is_admin(user_id):
+    # اگر استارت معمولی بود
+    if user_id != ADMIN_ID:
+        return
+
+    await update.message.reply_text(
+        "👑 پنل ادمین فعال شد\n\n"
+        "📄 فایل بفرست تا FILE_ID آن را بگیری."
+    )
+
+
+# گرفتن FILE_ID فقط برای ادمین
+async def get_file_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_user.id != ADMIN_ID:
         return
 
     if update.message.document:
         await update.message.reply_text(
-            f"📦 FILE_ID:\n{update.message.document.file_id}"
+            f"📦 FILE_ID:\n\n{update.message.document.file_id}"
         )
+
 
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("start", send_file))
     app.add_handler(MessageHandler(filters.Document.ALL, get_file_id))
 
     print("Bot is running...")
     app.run_polling()
+
 
 if __name__ == "__main__":
     main()
