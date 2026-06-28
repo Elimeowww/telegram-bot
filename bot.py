@@ -7,8 +7,6 @@ logging.basicConfig(level=logging.INFO)
 
 TOKEN = "8871850096:AAGOuOUIPOfpdEY5l8oTC-cQtayH1bXdfhA"
 ADMIN_ID = 8256304031
-PORT = int(os.getenv("PORT", 8000))
-RAILWAY_URL = os.getenv("RAILWAY_PUBLIC_DOMAIN", "http://localhost:8000")
 
 FILES = {}  # 🟡 فایل‌ها اینجا ذخیره میشن
 
@@ -26,7 +24,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
     else:
         # 🚫 بقیه کاربران
-        pass  # هیچ چیز ارسال نشه
+        pass
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -79,19 +77,7 @@ async def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     app.add_handler(MessageHandler(filters.Document.ALL, handle_message))
     
-    await app.initialize()
-    await app.start()
-    await app.bot.set_webhook(url=f"{RAILWAY_URL}/webhook")
-    
-    await app.updater.start_webhook(
-        listen="0.0.0.0",
-        port=PORT,
-        url_path="/webhook",
-        webhook_url=f"{RAILWAY_URL}/webhook"
-    )
-    
-    print(f"✅ ربات فعال است! پورت: {PORT}")
-    await app.idle()
+    await app.run_polling()
 
 
 if __name__ == "__main__":
