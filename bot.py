@@ -5,7 +5,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = "8871850096:AAFTf5tNLFOimNCXDWCRXl1-XvzV3TILzvg"
+TOKEN = "8871850096:AAGOuOUIPOfpdEY5l8oTC-cQtayH1bXdfhA"
 ADMIN_ID = 8256304031
 PORT = int(os.getenv("PORT", 8000))
 RAILWAY_URL = os.getenv("RAILWAY_PUBLIC_DOMAIN", "http://localhost:8000")
@@ -26,5 +26,74 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
     else:
         # 🚫 بقیه کاربران
-        pass  # هیچ چیز
-
+        pass  # هیچ چیز ارسال نشه
+
+
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    bot = context.bot
+
+    # 👑 فقط ادمین می‌تونه فایل بفرسته
+    if user_id == ADMIN_ID:
+        if update.message.document:
+            file_id = update.message.document.file_id
+            file_name = update.message.document.file_name or "unknown"
+            
+            # 💾 ذخیره کد فایل
+            FILES[file_name] = file_id
+            
+            await update.message.reply_text(
+                f"✅ فایل ذخیره شد!\n\n"
+                f"📝 نام: `{file_name}`\n"
+                f"🔑 کد: `{file_id}`\n\n"
+                f"⬇️ کد رو کپی کن و توی FILES اضافه کن"
+            )
+        else:
+            await update.message.reply_text("❌ لطفاً فایل بفرست")
+    else:
+        # 🚫 بقیه کاربران - هیچ جواب نمی‌ده
+        pass
+
+
+async def files_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+
+    # 👑 فقط ادمین
+    if user_id == ADMIN_ID:
+        if not FILES:
+            await update.message.reply_text("❌ هیچ فایلی ذخیره نشده")
+        else:
+            text = "📁 فایل‌های ذخیره شده:\n\n"
+            for name, file_id in FILES.items():
+                text += f"📝 {name}\n🔑 {file_id}\n\n"
+            await update.message.reply_text(text)
+    else:
+        pass
+
+
+async def main():
+    app = ApplicationBuilder().token(TOKEN).build()
+    
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("files", files_command))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    app.add_handler(MessageHandler(filters.Document.ALL, handle_message))
+    
+    await app.initialize()
+    await app.start()
+    await app.bot.set_webhook(url=f"{RAILWAY_URL}/webhook")
+    
+    await app.updater.start_webhook(
+        listen="0.0.0.0",
+        port=PORT,
+        url_path="/webhook",
+        webhook_url=f"{RAILWAY_URL}/webhook"
+    )
+    
+    print(f"✅ ربات فعال است! پورت: {PORT}")
+    await app.idle()
+
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())
