@@ -12,7 +12,7 @@ TOKEN = "8769525491:AAH2Nh6T_ubofOXVUkO1rethXZcwaSVv24U"
 ADMIN_ID = 8256304031  # 👈 آیدی خودت
 
 # 📢 کانال‌های اجباری
-CHANNELS = "@gaptestes"
+CHANNELS = ["@gaptestes"]
     
 
 FILES = {
