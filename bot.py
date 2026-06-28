@@ -1,7 +1,7 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 
-TOKEN = "8769525491:AAH2Nh6T_ubofOXVUkO1rethXZcwaSVv24U"
+TOKEN = "8871850096:AAFTf5tNLFOimNCXDWCRXl1-XvzV3TILzvg"
 ADMIN_ID = 8256304031
 
 CHANNEL = "@gaptestes"
