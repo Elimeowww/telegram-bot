@@ -5,7 +5,10 @@ TOKEN = "8871850096:AAG7WEcfdR7Zg-BbmQuBqJdM2BpLtYroMl8"
 
 ADMIN_ID = 8256304031  # 👈 آیدی خودت
 
-CHANNEL = "@gaptestes"  # (اگر خواستی بعداً فعالش کن)
+CHANNEL = [ 
+    "@femboycuteir"
+    "https://t.me/+8W6XKgRQyYZkYjlk"
+]# (اگر خواستی بعداً فعالش کن)
 
 FILES = {
     "manhwa1": "FILE_ID_1",
