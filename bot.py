@@ -11,7 +11,7 @@ CHANNEL = [
 ]# (اگر خواستی بعداً فعالش کن)
 
 FILES = {
-    "manhwa122": "BQACAgQAAxkBAAOqakD94Gjhf9IY14k_ioEFmsBbFKoAAs4eAAK09AlSsFgEqZGBt0w8BA",
+    "manhwa132": "BQACAgQAAxkBAAOqakD94Gjhf9IY14k_ioEFmsBbFKoAAs4eAAK09AlSsFgEqZGBt0w8BA",
     "manhwa2": "FILE_ID_2",
     "manhwa3": "FILE_ID_3"
 }
