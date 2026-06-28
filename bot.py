@@ -5,8 +5,8 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = os.getenv("8871850096:AAFTf5tNLFOimNCXDWCRXl1-XvzV3TILzvg")
-ADMIN_ID = int(os.getenv( "8256304031"))
+TOKEN = "8871850096:AAFTf5tNLFOimNCXDWCRXl1-XvzV3TILzvg"
+ADMIN_ID = 8256304031
 PORT = int(os.getenv("PORT", 8000))
 RAILWAY_URL = os.getenv("RAILWAY_PUBLIC_DOMAIN", "http://localhost:8000")
 
