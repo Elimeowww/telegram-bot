@@ -12,10 +12,8 @@ TOKEN = "8769525491:AAH2Nh6T_ubofOXVUkO1rethXZcwaSVv24U"
 ADMIN_ID = 8256304031  # 👈 آیدی خودت
 
 # 📢 کانال‌های اجباری
-CHANNELS = [
-    "@gaptestes",
-    "@femboycuteir"
-]
+CHANNELS = "@gaptestes"
+    
 
 FILES = {
     "manhwa132": "BQACAgQAAxkBAAOqakD94Gjhf9IY14k_ioEFmsBbFKoAAs4eAAK09AlSsFgEqZGBt0w8BA",
