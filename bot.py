@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = "توکن_تو"
+TOKEN = "BQACAgQAAxkBAAOqakD94Gjhf9IY14k_ioEFmsBbFKoAAs4eAAK09AlSsFgEqZGBt0w8BA"
 
 ADMIN_ID = 8256304031  # 👈 آیدی خودت
 
@@ -12,7 +12,7 @@ CHANNELS = [
 ]
 
 FILES = {
-    "manhwa1": "BQACAgQAAxkBAAOqakD94Gjhf9IY14k_ioEFmsBbFKoAAs4eAAK09AlSsFgEqZGBt0w8BA",
+    "manhwa132": "BQACAgQAAxkBAAOqakD94Gjhf9IY14k_ioEFmsBbFKoAAs4eAAK09AlSsFgEqZGBt0w8BA",
     "manhwa2": "FILE_ID_2",
     "manhwa3": "FILE_ID_3"
 }
