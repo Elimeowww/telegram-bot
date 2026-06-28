@@ -5,7 +5,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 TOKEN = "8871850096:AAFfAuWjR1BPHTOkCeNxLuFtH2lpxTmJpck"
-CHANNELS = "@femboycuteir"
+CHANNEL = "@femboycuteir"
 
 # فایل‌ها
 FILES = {
@@ -16,7 +16,7 @@ FILES = {
 async def is_member(bot, user_id):
     """چک کردن عضویت"""
     try:
-        member = await bot.get_chat_member(CHANNELS, user_id)
+        member = await bot.get_chat_member(CHANNEL, user_id)
         return member.status in ["member", "creator", "administrator"]
     except:
         return False
