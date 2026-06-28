@@ -7,8 +7,18 @@ logging.basicConfig(level=logging.INFO)
 
 TOKEN = "8871850096:AAGOuOUIPOfpdEY5l8oTC-cQtayH1bXdfhA"
 ADMIN_ID = 8256304031
+CHANNEL = "@gaptestes"  # 🔗 کانال اجباری
 
 FILES = {}  # 🟡 فایل‌ها اینجا ذخیره میشن
+
+
+# 🔍 چک عضویت
+async def is_member(bot, user_id):
+    try:
+        member = await bot.get_chat_member(CHANNEL, user_id)
+        return member.status in ["member", "creator", "administrator"]
+    except:
+        return False
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -23,6 +33,17 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "🔹 یا /files برای دیدن فایل‌های موجود"
         )
     else:
+        # ❌ اگر عضو نیست
+        if not await is_member(bot, user_id):
+            keyboard = [
+                [InlineKeyboardButton("📢 عضویت در کانال", url=f"https://t.me/{CHANNEL.replace('@','')}")]
+            ]
+            await update.message.reply_text(
+                "❌ اول عضو کانال شو بعد دوباره امتحان کن",
+                reply_markup=InlineKeyboardMarkup(keyboard)
+            )
+            return
+
         # 🚫 بقیه کاربران
         pass
 
@@ -49,12 +70,24 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await update.message.reply_text("❌ لطفاً فایل بفرست")
     else:
+        # ❌ اگر عضو نیست
+        if not await is_member(bot, user_id):
+            keyboard = [
+                [InlineKeyboardButton("📢 عضویت در کانال", url=f"https://t.me/{CHANNEL.replace('@','')}")]
+            ]
+            await update.message.reply_text(
+                "❌ اول عضو کانال شو بعد دوباره امتحان کن",
+                reply_markup=InlineKeyboardMarkup(keyboard)
+            )
+            return
+
         # 🚫 بقیه کاربران - هیچ جواب نمی‌ده
         pass
 
 
 async def files_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
+    bot = context.bot
 
     # 👑 فقط ادمین
     if user_id == ADMIN_ID:
@@ -66,6 +99,17 @@ async def files_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 text += f"📝 {name}\n🔑 {file_id}\n\n"
             await update.message.reply_text(text)
     else:
+        # ❌ اگر عضو نیست
+        if not await is_member(bot, user_id):
+            keyboard = [
+                [InlineKeyboardButton("📢 عضویت در کانال", url=f"https://t.me/{CHANNEL.replace('@','')}")]
+            ]
+            await update.message.reply_text(
+                "❌ اول عضو کانال شو بعد دوباره امتحان کن",
+                reply_markup=InlineKeyboardMarkup(keyboard)
+            )
+            return
+
         pass
 
 
