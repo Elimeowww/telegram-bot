@@ -5,7 +5,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 TOKEN = "8871850096:AAFfAuWjR1BPHTOkCeNxLuFtH2lpxTmJpck"
-CHANNELS = ["@femboycuteir", "@femboycutei"]
+CHANNELS = "@femboycuteir"
 
 # فایل‌ها
 FILES = {
