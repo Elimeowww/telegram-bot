@@ -1,10 +1,10 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = "8871850096:AAFfAuWjR1BPHTOkCeNxLuFtH2lpxTmJpck"
+TOKEN = "8769525491:AAH2Nh6T_ubofOXVUkO1rethXZcwaSVv24U"
 CHANNEL = "@femboycuteir"
 
 # فایل‌ها
@@ -54,7 +54,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         pass
 
 
-if name == "main":
+if __name__ == "__main__":  # ✅ درست
     app = ApplicationBuilder().token(TOKEN).build()
     
     app.add_handler(CommandHandler("start", start))
