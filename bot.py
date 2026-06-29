@@ -9,8 +9,7 @@ CHANNEL = "@femboycuteir"
 
 # فایل‌ها
 FILES = {
-    "manhwa25": "BQACAgQAAxkBAAIBA2pBEfZBoO8ww5EhmvrTXM8tlxsXAAI3HwACV-UJUnJzplB_2dIGPAQ"
-
+    "manhwa25": "BQACAgQAAxkBAAIBA2pBEfZBoO8ww5EhmvrTXM8tlxsXAAI3HwACV-UJUnJzplB_2dIGPAQ",
     "manwha26": "BQACAgQAAxkBAAIBumpCZQqJxF2l4g1kthuil1wZdp1aAAKDIAACLqsQUmnSXRv_AekpPAQ"
 }
 
