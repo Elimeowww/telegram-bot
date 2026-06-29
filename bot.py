@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = "8871850096:AAGij6XIGJ3K11TQuJuprf2XrPwrimugVkA"
+TOKEN = "8871850096:AAEDClkPHP-eJpf0SehaUwqFBvyH3FOjEAg"
 CHANNEL = "@femboycuteir"
 
 # فایل‌ها
