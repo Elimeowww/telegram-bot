@@ -55,7 +55,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         pass
 
 
-if name == "main":  # ✅ درست
+ if __name__ == "__main__":  # ✅ درست
     app = ApplicationBuilder().token(TOKEN).build()
     
     app.add_handler(CommandHandler("start", start))
