@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = "8871850096:AAFTf5tNLFOimNCXDWCRXl1-XvzV3TILzvg"
+TOKEN = "8871850096:AAGij6XIGJ3K11TQuJuprf2XrPwrimugVkA"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("سلام! فایل بفرست")
@@ -20,7 +20,7 @@ async def handle_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"🔑 کد: {file_id}"
         )
 
-if name == "main":
+if __name__ == "__main__":  # ✅ درست
     app = ApplicationBuilder().token(TOKEN).build()
     
     app.add_handler(CommandHandler("start", start))
